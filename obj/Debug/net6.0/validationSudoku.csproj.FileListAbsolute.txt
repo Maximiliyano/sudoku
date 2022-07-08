@@ -1,0 +1,15 @@
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\validationSudoku.csproj.AssemblyReference.cache
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\validationSudoku.GeneratedMSBuildEditorConfig.editorconfig
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\validationSudoku.AssemblyInfoInputs.cache
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\validationSudoku.AssemblyInfo.cs
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\validationSudoku.csproj.CoreCompileInputs.cache
+D:\Local\C#\validationSudoku\bin\Debug\net6.0\validationSudoku.exe
+D:\Local\C#\validationSudoku\bin\Debug\net6.0\validationSudoku.deps.json
+D:\Local\C#\validationSudoku\bin\Debug\net6.0\validationSudoku.runtimeconfig.json
+D:\Local\C#\validationSudoku\bin\Debug\net6.0\validationSudoku.dll
+D:\Local\C#\validationSudoku\bin\Debug\net6.0\validationSudoku.pdb
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\validationSudoku.dll
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\refint\validationSudoku.dll
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\validationSudoku.pdb
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\validationSudoku.genruntimeconfig.cache
+D:\Local\C#\validationSudoku\obj\Debug\net6.0\ref\validationSudoku.dll
