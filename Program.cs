@@ -8,12 +8,12 @@ namespace validationSudoku
 {
     class Program
     {
-        
+        static readonly int N = 9;
         static int ValidRow(int row, int[,] matrix)
         {
             for(int i = 0; i < matrix.GetLength(0); i++)
             {
-                if(matrix[row, i] < 0 || matrix[row, i] > 9)
+                if(matrix[row, i] < 0 || matrix[row, i] > N)
                 {
                     Console.WriteLine("Invalid value");
                     return 0;
@@ -26,7 +26,7 @@ namespace validationSudoku
         {
             for(int i = 0; i < matrix.GetLength(1); i++)
             {
-                if(matrix[i, col] < 0 || matrix[i, col] > 9)
+                if(matrix[i, col] < 0 || matrix[i, col] > N)
                 {
                     Console.WriteLine("Invalid value");
                     return -1;
@@ -45,7 +45,7 @@ namespace validationSudoku
                     {
                         for(int c = col; c < col + 3; c++)
                         {
-                            if(matrix[r, c] < 0 || matrix[r, c] > 9)
+                            if(matrix[r, c] < 0 || matrix[r, c] > N)
                             {
                                 Console.WriteLine("Invalid value");
                                 return 0;
