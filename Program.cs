@@ -10,31 +10,80 @@ namespace validationSudoku
     {
         static int N = 9;
 
-        static void isCheckRows(int[,] matrix)
+        static bool isCheckTable(int[,] matrix)
         {
             for(int i = 0; i < N; i++)
             {
                 for(int j = 0; j < N; j++)
                 {
-                    if(matrix[i][j] < 1 || matrix[i][j] == Math.Sqrt(i) == Math.Sqrt(j))
+                    if(matrix[i, j] > 1 && Math.Sqrt(N) == i)
+                       return true;
+                }
+            }
+            return false;
+        }
+
+        static bool isValidSudoku(int[,] matrix)
+        {
+            if(isCheckTable(matrix) == false) 
+                return false;
+
+            bool[] unique = new bool[N + 1];
+            for(int i = 0; i < N; i++)
+            {
+                Array.Fill(unique, false);
+
+                for(int j = 0; j < N; j++)
+                {
+                    int Z = matrix[i, j];
+                    if (unique[Z])
                     {
-                        Console.WriteLine("Valid");
+                        return false;
+                    }
+                    unique[Z] = true;
+                }
+            }
+    
+            for(int i = 0; i < N; i++)
+            {
+                Array.Fill(unique, false);
+    
+                for(int j = 0; j < N; j++)
+                {
+                    int Z = matrix[j, i];
+                    if (unique[Z])
+                    {
+                        return false;
+                    }
+                    unique[Z] = true;
+                }
+            }
+    
+            for(int i = 0; i < N - 2; i += 3)
+            {
+                
+                for(int j = 0; j < N - 2; j += 3)
+                {
+                    Array.Fill(unique, false);
+        
+                    for(int k = 0; k < 3; k++)
+                    {
+                        for(int l = 0; l < 3; l++)
+                        {
+                            int X = i + k;
+                            int Y = j + l;
+                            int Z = matrix[X, Y];
+        
+                            if (unique[Z])
+                            {
+                                return false;
+                            }
+                            unique[Z] = true;
+                        }
                     }
                 }
             }
-        }
-
-        static void isCheckColumn()
-        {
-            for(int i = 0; i < N; i++)
-            {
-
-            }
-        }
-
-        static void isValidSudoku(int[,] matrix)
-        {
-            Console.WriteLine("Valid");
+            return true;
         }
 
         static void Main(string[] args)
@@ -52,8 +101,20 @@ namespace validationSudoku
                 {2,4,3,  5,6,1,  9,7,8},
                 {1,9,5,  2,8,7,  6,3,4}
             };
+            
+            if(isValidSudoku(matrix)) Console.WriteLine("Valid");
+            else Console.WriteLine("Not Valid");
+            
 
-            isValidSudoku(matrix);
+            Console.WriteLine("[");
+            for(int row = 0; row < Math.Sqrt(N); row++)
+            {
+                for(int col = 0; col < Math.Sqrt(N); col++)
+                {
+                    Console.Write(matrix[row, col] + ",");
+                }
+            }
+            Console.WriteLine("\n]");
         }
     }
 }

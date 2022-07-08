@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oOeAOXQkuEj33SP5/+9DuPYORiBgXRuiIioeCrj9+eajZoNvb4Cuuu026A9FGDBePU/i9sWDUSqGJN57j2WEFQ==",
+  "dgSpecHash": "MfBKJDniDVDC68F9+pGJRcYvvHcAvwHUzOaEkLeJ9seLQKO6ZC94xCElRVxlH+p9Qz0rJ7FDpae1A6wNYtvr5Q==",
   "success": true,
-  "projectFilePath": "D:\\Local\\C#\\validationSudoku\\validationSudoku.csproj",
+  "projectFilePath": "D:\\Local\\C#\\sudoku\\validationSudoku.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
