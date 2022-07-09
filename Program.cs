@@ -79,29 +79,30 @@ namespace validationSudoku
             }
         }
 
-        static void KeyBoardFillMatrix(int[,] matrix)
+        static int[,] KeyBoardFillMatrix(int N)
         {
-            Console.Write("Enter {0} row values: ", N);
-            
-            string[] str = Console.ReadLine().Split();
-            foreach(string cut in str)
+            int[,] output = new int[N, N];
+            for(int i = 0; i < N; i++) 
             {
-                if(cut.Trim() != "")
+                string[] input = new string[N];
+                Console.WriteLine("Enter the row the sudocu: ");
+                do
                 {
-                    int[] count = new int[N];
+                    input = Console.ReadLine().Trim().Split();
 
-                    for(int i = 0; i < matrix.GetLength(0); i++) 
-                    {
-                        count[i] = Int32.Parse(cut);
-                        if(count[i] < 1 || count[i] > N) 
-                        {
-                            Console.WriteLine("Enter row again!");
-                            break;
-                        }
-                        matrix[0, i] = count[i];
-                    }
+                    int getAStringLength = input.GetLength(0);
+                    if (getAStringLength < N || getAStringLength > N)
+                        Console.WriteLine("- Please enter the row again:");
+                    else
+                        break;
+                } 
+                while (true);
+                for(int j = 0; j < N; j++)
+                {
+                    output[i, j] = int.Parse(input[j]);
                 }
             }
+            return output;
         }
 
         static void ValidSudoku(int[,] matrix) 
