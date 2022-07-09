@@ -8,7 +8,7 @@ namespace validationSudoku
 {
     class Program
     {
-        static readonly int N = 9;
+        static readonly int N = 3;
         
         static bool ValidRow(int[,] matrix, int row)
         {
@@ -79,7 +79,7 @@ namespace validationSudoku
             }
         }
 
-        static void ManualFillMassive(int[,] matrix)
+        static void KeyBoardFillMatrix(int[,] matrix)
         {
             Console.Write("Enter {0} row values: ", N);
             
@@ -100,16 +100,8 @@ namespace validationSudoku
                         }
                         matrix[0, i] = count[i];
                     }
-                    //Console.WriteLine(count);
                 }
             }
-            /*if(str.Length() > N) Console.Write("Enter row again: ");
-            for(int i = 0; i < str.Length; i++)
-            {
-                int[] rows = new int[N]; 
-                rows[i] = Convert.ToInt32(str);
-                Console.WriteLine("{0}", rows);
-            }*/
         }
 
         static void ValidSudoku(int[,] matrix) 
@@ -127,7 +119,7 @@ namespace validationSudoku
             else Console.WriteLine("Sudoku is valid!");
         }
 
-        static void DisplaySudoku(int[,] matrix)
+        static void Display(int[,] matrix)
         {
             for(int row = 0; row < matrix.GetLength(0); row++)
             {
@@ -146,7 +138,7 @@ namespace validationSudoku
             Console.Write("Fill massive, enter 'true' (random) or 'false' (manual): ");
             bool input_params = Convert.ToBoolean(Console.ReadLine());
 
-            if (!input_params) ManualFillMassive(matrix);
+            if (!input_params) KeyBoardFillMatrix(matrix);
             else RandomFillMassive(matrix);
 
             // Валідація цифр
@@ -156,7 +148,7 @@ namespace validationSudoku
             ValidSudoku(matrix);
             
             // Вивід масиву
-            DisplaySudoku(matrix);
+            Display(matrix);
         }
     }
 }
