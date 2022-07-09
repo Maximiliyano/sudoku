@@ -42,8 +42,6 @@ namespace validationSudoku
             {
                 for(int col = 0; col < matrix.GetLength(1); col = col + 3)
                 {
-                    //for(int r = row; r < row + 3; r++)
-                    //for(int c = col; c < col + 3; c++)
                     if(matrix[row, col] < 0 || matrix[row, col] > N)
                     {
                         Console.WriteLine("Invalid value");
@@ -54,53 +52,111 @@ namespace validationSudoku
             return true;
         }
         
-        static void ValidSudoku(int[,] matrix) 
+        static void ValidCount(int[,] matrix) 
         {
             for(int i = 0; i < N; i++)
             {   
                 if(!ValidRow(matrix, i) || !ValidColumn(matrix, i))
                 {
-                    Console.WriteLine("Sudoku is invalid");
+                    Console.WriteLine("Count is invalid");
                     return;
                 }
             }
 
-            if(!ValidSubSquares(matrix)) Console.WriteLine("Sudoku is invalid");
-            else Console.WriteLine("Sudoku is valid");
+            if(!ValidSubSquares(matrix)) Console.WriteLine("Count is invalid");
         }
 
-        // if(matrix[i, j] > 1 && Math.Sqrt(N) == i)
+        static void RandomFillMassive(int[,] matrix)
+        {
+            Random random = new Random();
+
+            for(int row = 0; row < matrix.GetLength(0); row++)
+            {
+                for(int col = 0; col < matrix.GetLength(1); col++)
+                {
+                    matrix[row, col] = random.Next(1, N);
+                }
+            }
+        }
+
+        static void ManualFillMassive(int[,] matrix)
+        {
+            Console.Write("Enter {0} row values: ", N);
+            
+            string[] str = Console.ReadLine().Split();
+            foreach(string cut in str)
+            {
+                if(cut.Trim() != "")
+                {
+                    int[] count = new int[N];
+
+                    for(int i = 0; i < matrix.GetLength(0); i++) 
+                    {
+                        count[i] = Int32.Parse(cut);
+                        if(count[i] < 1 || count[i] > N) 
+                        {
+                            Console.WriteLine("Enter row again!");
+                            break;
+                        }
+                        matrix[0, i] = count[i];
+                    }
+                    //Console.WriteLine(count);
+                }
+            }
+            /*if(str.Length() > N) Console.Write("Enter row again: ");
+            for(int i = 0; i < str.Length; i++)
+            {
+                int[] rows = new int[N]; 
+                rows[i] = Convert.ToInt32(str);
+                Console.WriteLine("{0}", rows);
+            }*/
+        }
+
+        static void ValidSudoku(int[,] matrix) 
+        {
+            int summa = 0, summas = 0;
+            for(int row = 0; row < matrix.GetLength(0); row++)
+            {
+                summa += matrix[row, 0];
+                for(int col = 0; col < matrix.GetLength(1); col++)
+                {
+                    summas += matrix[0, col];
+                }
+            }
+            if(summa != summas) Console.WriteLine("Sudoku is not valid!");
+            else Console.WriteLine("Sudoku is valid!");
+        }
+
+        static void DisplaySudoku(int[,] matrix)
+        {
+            for(int row = 0; row < matrix.GetLength(0); row++)
+            {
+                for(int col = 0; col < matrix.GetLength(1); col++)
+                {
+                    Console.Write(matrix[row, col] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
 
         static void Main(string[] args)
         {
-            Console.Read();
-            int[,] matrix = {
-                {7,8,4,  1,5,9,  3,2,6},
-                {5,3,9,  6,7,2,  8,4,1},
-                {6,1,2,  4,3,8,  7,5,9},
+            int[,] matrix = new int[N,N];
 
-                {9,2,8,  7,1,5,  4,6,3},
-                {3,5,7,  8,4,6,  1,9,2},
-                {4,6,1,  9,2,3,  5,8,7},
+            Console.Write("Fill massive, enter 'true' (random) or 'false' (manual): ");
+            bool input_params = Convert.ToBoolean(Console.ReadLine());
 
-                {8,7,6,  3,9,4,  2,1,5},
-                {2,4,3,  5,6,1,  9,7,8},
-                {1,9,5,  2,8,7,  6,3,4}
-            };
+            if (!input_params) ManualFillMassive(matrix);
+            else RandomFillMassive(matrix);
 
-            // Вивід масиву
-            for(int row = 0; row < matrix.GetLength(0); row++)
-            {
-                Console.WriteLine("[");
-                for(int col = 0; col < matrix.GetLength(1); col++)
-                {
-                    Console.Write(matrix[row, col] + ", ");
-                }
-                Console.WriteLine("]");
-            }
+            // Валідація цифр
+            ValidCount(matrix);
 
-            // Валідація
+            // Валідація судоку
             ValidSudoku(matrix);
+            
+            // Вивід масиву
+            DisplaySudoku(matrix);
         }
     }
 }
