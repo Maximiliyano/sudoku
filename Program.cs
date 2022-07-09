@@ -122,12 +122,11 @@ namespace validationSudoku
 
         static void Display(int[,] matrix)
         {
-            for(int row = 0; row < matrix.GetLength(0); row++)
+            for(int i = 0; i < matrix.GetLength(0); i++)
             {
-                for(int col = 0; col < matrix.GetLength(1); col++)
-                {
-                    Console.Write(matrix[row, col] + "\t");
-                }
+                for(int j = 0; j < matrix.GetLength(1); j++)
+                    Console.Write("\t" + matrix[i, j]);
+
                 Console.WriteLine();
             }
         }
@@ -150,6 +149,8 @@ namespace validationSudoku
             
             // Вивід масиву
             Display(matrix);
+            
+            Console.ReadKey();
         }
     }
 }
