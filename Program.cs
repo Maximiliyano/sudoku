@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +9,7 @@ namespace validationSudoku
     class Program
     {
         static readonly int N = 9;
+        
         static int ValidRow(int row, int[,] matrix)
         {
             for(int i = 0; i < matrix.GetLength(0); i++)
@@ -29,7 +30,7 @@ namespace validationSudoku
                 if(matrix[i, col] < 0 || matrix[i, col] > N)
                 {
                     Console.WriteLine("Invalid value");
-                    return -1;
+                    return 0;
                 }
             }
             return 1;
@@ -41,17 +42,13 @@ namespace validationSudoku
             {
                 for(int col = 0; col < matrix.GetLength(1); col = col + 3)
                 {
-                    for(int r = row; r < row + 3; r++)
+                    //for(int r = row; r < row + 3; r++)
+                    //for(int c = col; c < col + 3; c++)
+                    if(matrix[row, col] < 0 || matrix[row, col] > N)
                     {
-                        for(int c = col; c < col + 3; c++)
-                        {
-                            if(matrix[r, c] < 0 || matrix[r, c] > N)
-                            {
-                                Console.WriteLine("Invalid value");
-                                return 0;
-                            }
-                        }
-                    }    
+                        Console.WriteLine("Invalid value");
+                        return 0;
+                    } 
                 }
             }
             return 1;
@@ -59,7 +56,7 @@ namespace validationSudoku
         
         static void ValidSudoku(int[,] matrix) 
         {
-            for(int i = 0; i < matrix.GetLength(0); i++)
+            for(int i = 0; i < N; i++)
             {
                 int row = ValidRow(i, matrix);
                 int column = ValidColumn(i, matrix);
@@ -72,17 +69,11 @@ namespace validationSudoku
             }
             int valid = ValidSubSquares(matrix);
 
-            if(valid < 1)
-            {
-                Console.WriteLine("Sudoku is invalid");
-            }
-            else
-            {
-                Console.WriteLine("Sudoku is valid");
-            }
+            if(valid < 1) Console.WriteLine("Sudoku is invalid");
+            else Console.WriteLine("Sudoku is valid");
         }
 
-           // if(matrix[i, j] > 1 && Math.Sqrt(N) == i)
+        // if(matrix[i, j] > 1 && Math.Sqrt(N) == i)
 
         static void Main(string[] args)
         {
@@ -111,6 +102,7 @@ namespace validationSudoku
                 Console.WriteLine("]");
             }
 
+            // Валідація
             ValidSudoku(matrix);
         }
     }
