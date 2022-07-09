@@ -168,7 +168,11 @@ namespace validationSudoku
             Console.Write("Enter size sudoku: ");
             int input_size = Convert.ToInt16(Console.ReadLine());
 
-            if(input_size < 1) Console.Write("You entered wrong count!"); 
+            if(input_size < 1 || Math.Sqrt(input_size) % 1 == 0) 
+            {
+                Console.Write("You entered wrong count!\n"); 
+                return;
+            }
 
             int[,] matrix = new int[input_size,input_size];
 
@@ -182,7 +186,7 @@ namespace validationSudoku
             ValidCount(matrix, input_size);
 
             // Валідація судоку
-            //IsCorrectSudocu(matrix);
+            IsCorrectSudocu(matrix);
             
             // Вивід масиву
             Display(matrix);
