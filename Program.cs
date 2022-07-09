@@ -138,7 +138,7 @@ namespace validationSudoku
             Console.Write("Fill massive, enter 'true' (random) or 'false' (manual): ");
             bool input_params = Convert.ToBoolean(Console.ReadLine());
 
-            if (!input_params) KeyBoardFillMatrix(matrix);
+            if (!input_params) matrix = KeyBoardFillMatrix(N);
             else RandomFillMassive(matrix);
 
             // Валідація цифр
@@ -149,7 +149,7 @@ namespace validationSudoku
             
             // Вивід масиву
             Display(matrix);
-            
+
             Console.ReadKey();
         }
     }
