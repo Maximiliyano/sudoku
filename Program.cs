@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace validationSudoku
 {
     class Program
-    {   
+    {
         static bool ValidRow(int[,] matrix, int row)
         {
-            for(int i = 0; i < matrix.GetLength(0); i++)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                if(matrix[row,i] < 1 || matrix[row,i] > 9)
+                if (matrix[row, i] < 1 || matrix[row, i] > 9)
                 {
                     Console.WriteLine("Invalid value");
                     return false;
@@ -20,12 +20,12 @@ namespace validationSudoku
             }
             return true;
         }
-        
+
         static bool ValidColumn(int[,] matrix, int col)
         {
-            for(int i = 0; i < matrix.GetLength(1); i++)
+            for (int i = 0; i < matrix.GetLength(1); i++)
             {
-                if(matrix[i,col] < 1 || matrix[i,col] > 9)
+                if (matrix[i, col] < 1 || matrix[i, col] > 9)
                 {
                     Console.WriteLine("Invalid value");
                     return false;
@@ -33,35 +33,34 @@ namespace validationSudoku
             }
             return true;
         }
-        
+
         static bool ValidSubSquares(int[,] matrix)
         {
-            for(int row = 0; row < matrix.GetLength(0); row = row + 3)
+            for (int row = 0; row < matrix.GetLength(0); row = row + 3)
             {
-                for(int col = 0; col < matrix.GetLength(1); col = col + 3)
+                for (int col = 0; col < matrix.GetLength(1); col = col + 3)
                 {
-                    if(matrix[row,col] < 1 || matrix[row,col] > 9)
+                    if (matrix[row, col] < 1 || matrix[row, col] > 9)
                     {
                         Console.WriteLine("Invalid value");
                         return false;
-                    } 
-                }
-            }
-            return true;
-        }
-        
-        static void ValidCount(int[,] matrix, int N) 
-        {
-            for(int i = 0; i < N; i++)
-            {   
-                if(!ValidRow(matrix, i) || !ValidColumn(matrix, i))
-                {
-                    Console.WriteLine("Count is invalid");
-                    return;
+                    }
                 }
             }
 
-            if(!ValidSubSquares(matrix)) Console.WriteLine("Count is invalid");
+            return true;
+        }
+
+        static bool ValidCount(int[,] matrix, int N)
+        {
+            for (int i = 0; i < N; i++)
+            {
+                if (!ValidRow(matrix, i) || !ValidColumn(matrix, i))
+                    return false;
+            }
+            if (!ValidSubSquares(matrix)) return false;
+            
+            return true;
         }
 
         static void RandomFillMassive(int[,] matrix)
@@ -168,7 +167,7 @@ namespace validationSudoku
             Console.Write("Enter size sudoku: ");
             int input_size = Convert.ToInt16(Console.ReadLine());
 
-            if(input_size < 1 || Math.Sqrt(input_size) % 1 == 0) 
+            if(input_size < 1 || Math.Sqrt(input_size) % 1 != 0) 
             {
                 Console.Write("You entered wrong count!\n"); 
                 return;
@@ -183,10 +182,13 @@ namespace validationSudoku
             else RandomFillMassive(matrix);
 
             // Валідація цифр
-            ValidCount(matrix, input_size);
-
+            if (!ValidCount(matrix, input_size))
+            {
+                Console.WriteLine("Count is invalid");
+                return;
+            }
             // Валідація судоку
-            IsCorrectSudocu(matrix);
+            //IsCorrectSudocu(matrix);
             
             // Вивід масиву
             Display(matrix);
