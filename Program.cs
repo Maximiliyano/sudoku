@@ -105,7 +105,7 @@ namespace validationSudoku
         static int SumOfRow(int[,] matrix, int rowNum)
         {
             int sum = 0;
-            for(int i = 0; i < matrix.GetLength(1); i++)
+            for(int i = 0; i < matrix.GetLength(0); i++)
             {
                 sum += matrix[rowNum, i];
             }
@@ -115,7 +115,7 @@ namespace validationSudoku
         static int SumOfColumn(int[,] matrix, int columnNum)
         {
             int sum = 0;
-            for(int i = 0; i < matrix.Length; i++)
+            for(int i = 0; i < matrix.GetLength(1); i++)
             {
                 sum += matrix[i, columnNum];
             }
@@ -132,16 +132,16 @@ namespace validationSudoku
 
         static bool IsCorrectSudocu(int[,] matrix)
         {
-            int pivotSum = PivotSum(matrix.Length);
+            int pivotSum = PivotSum(matrix.GetLength(0));
 
-            for(int i = 1; i < matrix.Length; i++)
+            for(int i = 1; i < matrix.GetLength(0); i++)
             {
                 int sumOfRow = SumOfRow(matrix, i);
                 if (sumOfRow != pivotSum)
                     return false;
             }
 
-            for (int i = 0; i < matrix.Length; i++)
+            for (int i = 0; i < matrix.GetLength(1); i++)
             {
                 int sumOfСolumn = SumOfColumn(matrix, i);
                 if (sumOfСolumn != pivotSum)
