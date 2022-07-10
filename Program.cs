@@ -105,7 +105,7 @@ namespace validationSudoku
         static int SumOfRow(int[,] matrix, int rowNum)
         {
             int sum = 0;
-            for(int i = 0; i < matrix.Length; i++)
+            for(int i = 0; i < matrix.GetLength(1); i++)
             {
                 sum += matrix[rowNum, i];
             }
@@ -188,7 +188,12 @@ namespace validationSudoku
                 return;
             }
             // Валідація судоку
-            //IsCorrectSudocu(matrix);
+            if(!IsCorrectSudocu(matrix)) 
+            {
+                Console.WriteLine("Sudocu is not valid");
+                return;
+            }
+            else Console.WriteLine("Sudocu is valid");
             
             // Вивід масиву
             Display(matrix);
